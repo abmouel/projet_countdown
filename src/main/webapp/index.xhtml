@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <title>Ajouter un compteur</title>
+    </h:head>
+    <h:body>
+        
+        <h:form>
+    <p:panel id="panel" header="Ajouter un compteur" >
+ 
+        <p:messages id="msgs" />
+ 
+        <h:panelGrid columns="3" cellpadding="5" style="margin-bottom:10px">
+            <p:outputLabel for="titre" value="Titre: " />
+            <p:inputText id="titre" value="#{countController.current.titre}" required="true" label="Titre">
+                <f:validateLength minimum="2" />
+            </p:inputText>
+            <p:message for="titre" id="msgTitre" display="icon" />
+ 
+            <p:outputLabel for="langue" value="Langue: " />
+            <h:selectOneMenu id="langue" value="#{countController.current.langue}" required="true" label="Langue" style="width:125px">
+                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="Français" itemValue="1" />
+                <f:selectItem itemLabel="Anglais" itemValue="2" />
+                <f:selectItem itemLabel="Arabe" itemValue="3" />
+                <p:ajax update="msgLangue" event="keyup" />
+            </h:selectOneMenu>
+            <p:message for="langue" id="msgLangue" display="icon" />
+                        
+            <p:outputLabel for="date" value="Date: " />
+            <p:calendar id="date" value="#{countController.current.date}" pattern="yyyy-dd-MM HH:mm:ss" />          
+            <p:message for="date" id="msgDate" display="icon" />
+             
+        </h:panelGrid>
+ 
+        <p:commandButton value="Enregister" update="panel" actionListener="#{countController.create()}" icon="ui-icon-check" />
+        <h:link outcome="/listCounts.xhtml" value="Voir tout"/>
+    </p:panel>
+</h:form>
+        
+        
+        
+    </h:body>
+    
+</html>
+

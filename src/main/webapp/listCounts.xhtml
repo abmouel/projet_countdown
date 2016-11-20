@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Liste des compteurs</title>
+    </h:head>
+    <h:body>
+     <h:form id="form">
+         <p:dataGrid var="count" value="#{countController.counts}" columns="3"
+        rows="12" paginator="true" id="count"
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+        rowsPerPageTemplate="6,12,16">
+ 
+        <f:facet name="header">
+            Liste des compteurs
+        </f:facet>
+ 
+        <p:panel header="Compteur numéro : #{count.id}" style="text-align:center">
+            <h:panelGrid columns="1" style="width:100%">
+                <h:outputText value="#{count.date}" />
+ 
+                <h:outputText value="#{count.titre}" />
+ 
+                <h:link  title="#{countController.diff(count)}">
+                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                </h:link>
+                <h:commandLink style="margin:0 auto;" title="Supprimer" styleClass="ui-icon ui-icon-trash" value="Supprimer" action="#{countController.remove(count)}"></h:commandLink>
+            </h:panelGrid>
+        </p:panel>
+ 
+    </p:dataGrid>
+</h:form>
+    </h:body>
+    
+</html>
